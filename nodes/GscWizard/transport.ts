@@ -18,7 +18,6 @@ type Context = IExecuteFunctions | ILoadOptionsFunctions;
 interface ApiErrorBody {
 	code?: string;
 	message?: string;
-	why?: string;
 	nextStep?: string;
 }
 
@@ -117,7 +116,6 @@ export function toNodeApiError(context: Context, error: unknown, itemIndex?: num
 			message = `GSC Wizard refused access${suffix}`;
 			description = joinSentences(
 				apiMessage,
-				body?.why,
 				body?.nextStep ??
 					'Check that the property is connected and activated in GSC Wizard, and that the API key is not read-only for write operations.',
 			);
