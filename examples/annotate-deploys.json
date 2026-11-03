@@ -1,0 +1,35 @@
+{
+	"name": "GSC Wizard: annotate every deploy",
+	"nodes": [
+		{
+			"parameters": { "httpMethod": "POST", "path": "deployed", "options": {} },
+			"id": "5d6e7f80-1a2b-4c3d-9e8f-0a1b2c3d4e01",
+			"name": "Deploy Finished",
+			"type": "n8n-nodes-base.webhook",
+			"typeVersion": 2,
+			"position": [0, 0],
+			"webhookId": "5d6e7f80-1a2b-4c3d-9e8f-0a1b2c3d4e99"
+		},
+		{
+			"parameters": {
+				"resource": "annotation",
+				"operation": "create",
+				"scope": "property",
+				"siteUrl": { "__rl": true, "mode": "url", "value": "sc-domain:example.com" },
+				"eventDate": "={{ $now.toISODate() }}",
+				"label": "=Deploy {{ $json.body.version }}",
+				"additionalFields": { "category": "release", "description": "={{ $json.body.notes }}" }
+			},
+			"id": "5d6e7f80-1a2b-4c3d-9e8f-0a1b2c3d4e02",
+			"name": "Create Annotation",
+			"type": "n8n-nodes-gsc-wizard.gscWizard",
+			"typeVersion": 1,
+			"position": [260, 0],
+			"credentials": { "gscWizardApi": { "id": "", "name": "GSC Wizard API" } }
+		}
+	],
+	"connections": {
+		"Deploy Finished": { "main": [[{ "node": "Create Annotation", "type": "main", "index": 0 }]] }
+	},
+	"settings": {}
+}

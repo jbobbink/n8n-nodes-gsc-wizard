@@ -1,0 +1,1499 @@
+{
+	"apiVersion": "1.0.0",
+	"tools": {
+		"add_migration_redirects": {
+			"properties": [
+				"label",
+				"redirects",
+				"siteUrlA",
+				"siteUrlB"
+			],
+			"required": [
+				"redirects",
+				"siteUrlA",
+				"siteUrlB"
+			]
+		},
+		"add_site": {
+			"properties": [
+				"siteUrl",
+				"tags"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"add_tracked_urls": {
+			"properties": [
+				"siteUrl",
+				"urls"
+			],
+			"required": [
+				"siteUrl",
+				"urls"
+			]
+		},
+		"analyze_cannibalization": {
+			"properties": [
+				"endDate",
+				"limit",
+				"minImpressions",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"analyze_ctr_curve": {
+			"properties": [
+				"benchmarkSource",
+				"endDate",
+				"minImpressions",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"analyze_query_shapes": {
+			"properties": [
+				"buckets",
+				"endDate",
+				"examplesPerBucket",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"analyze_sampling_impact": {
+			"properties": [
+				"endDate",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"audit_onpage_seo": {
+			"properties": [
+				"maxUrls",
+				"minImpressions",
+				"siteUrl",
+				"urls"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"breakdown_by_path": {
+			"properties": [
+				"depth",
+				"endDate",
+				"limit",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"bulk_inspect_urls": {
+			"properties": [
+				"siteUrl",
+				"urls"
+			],
+			"required": [
+				"siteUrl",
+				"urls"
+			]
+		},
+		"check_tracked_url_now": {
+			"properties": [
+				"siteUrl",
+				"urls"
+			],
+			"required": [
+				"siteUrl",
+				"urls"
+			]
+		},
+		"compare_migration": {
+			"properties": [
+				"endDate",
+				"goLiveDate",
+				"limit",
+				"mode",
+				"regexA",
+				"regexB",
+				"siteUrl",
+				"siteUrlB",
+				"startDate",
+				"urlPrefixA",
+				"urlPrefixB",
+				"windowDays",
+				"windowStrategy",
+				"yoyBaseline"
+			],
+			"required": [
+				"mode",
+				"siteUrl"
+			]
+		},
+		"create_annotation": {
+			"properties": [
+				"category",
+				"clientRequestId",
+				"color",
+				"description",
+				"eventDate",
+				"label",
+				"siteUrl"
+			],
+			"required": [
+				"eventDate",
+				"label"
+			]
+		},
+		"create_content_group": {
+			"properties": [
+				"color",
+				"description",
+				"name",
+				"rules",
+				"siteUrl"
+			],
+			"required": [
+				"name",
+				"rules",
+				"siteUrl"
+			]
+		},
+		"create_gsc_property": {
+			"properties": [
+				"parentSiteUrl",
+				"propertyUrls",
+				"register"
+			],
+			"required": [
+				"parentSiteUrl",
+				"propertyUrls"
+			]
+		},
+		"create_report_client": {
+			"properties": [
+				"email",
+				"name"
+			],
+			"required": [
+				"email"
+			]
+		},
+		"create_saved_filter": {
+			"properties": [
+				"clientRequestId",
+				"filterLogic",
+				"filters",
+				"name",
+				"siteUrl"
+			],
+			"required": [
+				"filters",
+				"name",
+				"siteUrl"
+			]
+		},
+		"create_shared_report": {
+			"properties": [
+				"columns",
+				"comparisonRange",
+				"dataSourceType",
+				"dateRange",
+				"reportType",
+				"rows",
+				"siteUrl",
+				"title"
+			],
+			"required": [
+				"columns",
+				"rows",
+				"title"
+			]
+		},
+		"create_topic_cluster": {
+			"properties": [
+				"keywords",
+				"name",
+				"siteUrl"
+			],
+			"required": [
+				"keywords",
+				"name",
+				"siteUrl"
+			]
+		},
+		"delete_annotation": {
+			"properties": [
+				"annotationId"
+			],
+			"required": [
+				"annotationId"
+			]
+		},
+		"delete_content_group": {
+			"properties": [
+				"groupId"
+			],
+			"required": [
+				"groupId"
+			]
+		},
+		"delete_migration_redirects": {
+			"properties": [
+				"confirmDeleteAll",
+				"label",
+				"siteUrlA",
+				"siteUrlB"
+			],
+			"required": []
+		},
+		"delete_saved_filter": {
+			"properties": [
+				"filterId"
+			],
+			"required": [
+				"filterId"
+			]
+		},
+		"delete_shared_report": {
+			"properties": [
+				"reportId"
+			],
+			"required": [
+				"reportId"
+			]
+		},
+		"delete_site": {
+			"properties": [
+				"confirm",
+				"siteUrl"
+			],
+			"required": [
+				"confirm",
+				"siteUrl"
+			]
+		},
+		"delete_topic_cluster": {
+			"properties": [
+				"clusterId"
+			],
+			"required": [
+				"clusterId"
+			]
+		},
+		"detect_anomalies": {
+			"properties": [
+				"days",
+				"metric",
+				"minImpressions",
+				"sensitivity",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"detect_change_points": {
+			"properties": [
+				"days",
+				"endDate",
+				"metric",
+				"sensitivity",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"find_decaying_content": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"dimension",
+				"endDate",
+				"limit",
+				"minBaselineClicks",
+				"minImpressions",
+				"searchType",
+				"siteUrl",
+				"sortBy",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"find_page_poaching_opportunities": {
+			"properties": [
+				"endDate",
+				"fallbackBenchmark",
+				"limit",
+				"maxPosition",
+				"minImpressions",
+				"minPosition",
+				"searchType",
+				"siteUrl",
+				"startDate",
+				"targetPosition"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"forecast_traffic": {
+			"properties": [
+				"additionalSessions",
+				"aov",
+				"compoundGrowth",
+				"currency",
+				"cvr",
+				"forecastPeriods",
+				"granularity",
+				"growthRate",
+				"historyDays",
+				"metric",
+				"siteUrl",
+				"trendlineType"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"generate_seo_report": {
+			"properties": [
+				"days",
+				"format",
+				"includeSitemap",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_account_info": {
+			"properties": [],
+			"required": []
+		},
+		"get_bing_crawl_issues": {
+			"properties": [
+				"limit",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_bing_crawl_stats": {
+			"properties": [
+				"endDate",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_bing_feeds": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_bing_keyword_stats": {
+			"properties": [
+				"country",
+				"keyword",
+				"language"
+			],
+			"required": [
+				"keyword"
+			]
+		},
+		"get_bing_link_counts": {
+			"properties": [
+				"limit",
+				"page",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_bing_page_queries": {
+			"properties": [
+				"endDate",
+				"limit",
+				"page",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"page",
+				"siteUrl"
+			]
+		},
+		"get_bing_page_stats": {
+			"properties": [
+				"endDate",
+				"limit",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_bing_query_page_stats": {
+			"properties": [
+				"endDate",
+				"limit",
+				"query",
+				"seedLimit",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_bing_query_page_trend": {
+			"properties": [
+				"endDate",
+				"page",
+				"query",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"page",
+				"query",
+				"siteUrl"
+			]
+		},
+		"get_bing_query_stats": {
+			"properties": [
+				"endDate",
+				"limit",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_bing_traffic_stats": {
+			"properties": [
+				"endDate",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_bing_url_submission_quota": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_blended_landing_pages": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"dateGranularity",
+				"endDate",
+				"limit",
+				"organicOnly",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_branded_performance": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"endDate",
+				"limit",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_content_group_performance": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"endDate",
+				"groupId",
+				"limit",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_core_web_vitals": {
+			"properties": [
+				"formFactor",
+				"siteUrl",
+				"url"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_cross_site_summary": {
+			"properties": [
+				"countryLimit",
+				"days",
+				"includeCountries",
+				"includeSearchTypes",
+				"maxSites",
+				"searchType",
+				"tag"
+			],
+			"required": []
+		},
+		"get_decay_overview": {
+			"properties": [
+				"clusterKeywords",
+				"dimension",
+				"endDate",
+				"granularity",
+				"limit",
+				"metric",
+				"months",
+				"search",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_experiment_results": {
+			"properties": [
+				"confidenceLevel",
+				"endDate",
+				"experimentId",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"experimentId",
+				"siteUrl"
+			]
+		},
+		"get_feed_audit_results": {
+			"properties": [
+				"checkKey",
+				"limit",
+				"market",
+				"runDate",
+				"severity",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_filter_options": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_ga4_ecommerce": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"endDate",
+				"filters",
+				"limit",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_ga4_error_pages": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"endDate",
+				"limit",
+				"siteUrl",
+				"startDate",
+				"titleFilters"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_ga4_key_events": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"endDate",
+				"filters",
+				"keyEvent",
+				"limit",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_ga4_llm_traffic": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"endDate",
+				"includeDailySplit",
+				"limit",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_ga4_overview": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"endDate",
+				"filters",
+				"includeTimeseries",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_gmc_account_health": {
+			"properties": [
+				"languageCode",
+				"limit",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_gmc_best_sellers": {
+			"properties": [
+				"categoryId",
+				"countryCode",
+				"granularity",
+				"limit",
+				"reportDate",
+				"siteUrl",
+				"view"
+			],
+			"required": [
+				"countryCode",
+				"siteUrl"
+			]
+		},
+		"get_gmc_competitors": {
+			"properties": [
+				"categoryId",
+				"countryCode",
+				"endDate",
+				"limit",
+				"siteUrl",
+				"startDate",
+				"trafficSource",
+				"view"
+			],
+			"required": [
+				"categoryId",
+				"countryCode",
+				"siteUrl"
+			]
+		},
+		"get_gmc_data_sources": {
+			"properties": [
+				"includeUploads",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_gmc_pricing_insights": {
+			"properties": [
+				"countryCode",
+				"limit",
+				"siteUrl",
+				"sort"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_gmc_title_hygiene": {
+			"properties": [
+				"limit",
+				"siteUrl",
+				"topWords"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_indexing_tracker": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_indexing_tracker_report": {
+			"properties": [
+				"days",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_indexnow_settings": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_inspection_quota": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_longtail_clusters": {
+			"properties": [
+				"endDate",
+				"includeZeroClicks",
+				"pagesPerCluster",
+				"preset",
+				"sensitivity",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_merchant_listings_performance": {
+			"properties": [
+				"appearance",
+				"endDate",
+				"includeAppearances",
+				"limit",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_migration_health": {
+			"properties": [
+				"goLiveDate",
+				"mappingLabel",
+				"migrationId",
+				"onlyMapped",
+				"siteUrl",
+				"siteUrlB",
+				"windowDays",
+				"windowStrategy",
+				"yoyBaseline"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_organic_shopping_performance": {
+			"properties": [
+				"endDate",
+				"groupBy",
+				"includeNonProduct",
+				"limit",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_page_performance": {
+			"properties": [
+				"endDate",
+				"pageUrl",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"pageUrl",
+				"siteUrl"
+			]
+		},
+		"get_position_distribution": {
+			"properties": [
+				"dimension",
+				"endDate",
+				"granularity",
+				"scanLimit",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_product_listing_status": {
+			"properties": [
+				"limit",
+				"offset",
+				"onlyProblems",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_query_performance": {
+			"properties": [
+				"endDate",
+				"pageUrl",
+				"query",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"query",
+				"siteUrl"
+			]
+		},
+		"get_query_shape_trend": {
+			"properties": [
+				"endDate",
+				"granularity",
+				"months",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_query_value_attribution": {
+			"properties": [
+				"dateGranularity",
+				"endDate",
+				"limit",
+				"organicOnly",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_ranking_changes": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"dimension",
+				"endDate",
+				"limit",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_site_summary": {
+			"properties": [
+				"brand",
+				"contentGroupId",
+				"days",
+				"endDate",
+				"searchType",
+				"siteUrl",
+				"startDate",
+				"topicClusterId"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_sitemap_performance": {
+			"properties": [
+				"endDate",
+				"maxUrls",
+				"searchType",
+				"siteUrl",
+				"sitemapUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl",
+				"sitemapUrl"
+			]
+		},
+		"get_tag_group_view": {
+			"properties": [
+				"days",
+				"dimensions",
+				"limit",
+				"maxSites",
+				"searchType",
+				"tag"
+			],
+			"required": [
+				"tag"
+			]
+		},
+		"get_topic_cluster_performance": {
+			"properties": [
+				"clusterId",
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"endDate",
+				"limit",
+				"scanLimit",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_yandex_indexing_history": {
+			"properties": [
+				"endDate",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_yandex_query_stats": {
+			"properties": [
+				"deviceType",
+				"endDate",
+				"limit",
+				"orderBy",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"get_yandex_site_summary": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"inspect_url": {
+			"properties": [
+				"inspectionUrl",
+				"siteUrl"
+			],
+			"required": [
+				"inspectionUrl",
+				"siteUrl"
+			]
+		},
+		"list_algo_updates": {
+			"properties": [
+				"endDate",
+				"startDate"
+			],
+			"required": []
+		},
+		"list_annotations": {
+			"properties": [
+				"endDate",
+				"siteUrl",
+				"startDate"
+			],
+			"required": []
+		},
+		"list_bing_sites": {
+			"properties": [],
+			"required": []
+		},
+		"list_content_groups": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"list_experiments": {
+			"properties": [
+				"experimentId",
+				"includeArchived",
+				"includeUrls",
+				"memberOffset",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"list_ga4_custom_dimensions": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"list_ga4_properties": {
+			"properties": [],
+			"required": []
+		},
+		"list_gmc_accounts": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": []
+		},
+		"list_indexnow_submissions": {
+			"properties": [
+				"limit",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"list_migration_redirects": {
+			"properties": [
+				"label",
+				"limit",
+				"siteUrlA",
+				"siteUrlB",
+				"summaryOnly"
+			],
+			"required": []
+		},
+		"list_migrations": {
+			"properties": [],
+			"required": []
+		},
+		"list_report_clients": {
+			"properties": [
+				"limit"
+			],
+			"required": []
+		},
+		"list_saved_filters": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": []
+		},
+		"list_shared_reports": {
+			"properties": [
+				"limit"
+			],
+			"required": []
+		},
+		"list_sitemaps": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"list_sites": {
+			"properties": [],
+			"required": []
+		},
+		"list_tags": {
+			"properties": [
+				"includeSites"
+			],
+			"required": []
+		},
+		"list_topic_clusters": {
+			"properties": [
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"list_tracked_urls": {
+			"properties": [
+				"filter",
+				"page",
+				"pageSize",
+				"search",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"list_url_inspections": {
+			"properties": [
+				"latestPerUrl",
+				"limit",
+				"offset",
+				"siteUrl",
+				"urlContains"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"list_yandex_sites": {
+			"properties": [],
+			"required": []
+		},
+		"manage_report_access": {
+			"properties": [
+				"action",
+				"clientIds",
+				"reportId"
+			],
+			"required": [
+				"action",
+				"clientIds",
+				"reportId"
+			]
+		},
+		"manage_tags": {
+			"properties": [
+				"action",
+				"newName",
+				"siteUrls",
+				"tag"
+			],
+			"required": [
+				"action",
+				"tag"
+			]
+		},
+		"query_countries": {
+			"properties": [
+				"brand",
+				"contentGroupId",
+				"endDate",
+				"limit",
+				"offset",
+				"searchType",
+				"siteUrl",
+				"startDate",
+				"topicClusterId"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"query_devices": {
+			"properties": [
+				"brand",
+				"contentGroupId",
+				"endDate",
+				"searchType",
+				"siteUrl",
+				"startDate",
+				"topicClusterId"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"query_ga4_custom_dimensions": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"customMetrics",
+				"dimension",
+				"endDate",
+				"filters",
+				"limit",
+				"secondaryDimension",
+				"siteUrl",
+				"startDate",
+				"valueFilters"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"query_ga4_report": {
+			"properties": [
+				"comparisonEndDate",
+				"comparisonStartDate",
+				"dimension",
+				"endDate",
+				"filters",
+				"limit",
+				"secondaryDimension",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"dimension",
+				"siteUrl"
+			]
+		},
+		"query_gmc_report": {
+			"properties": [
+				"limit",
+				"query",
+				"siteUrl"
+			],
+			"required": [
+				"query",
+				"siteUrl"
+			]
+		},
+		"query_search_analytics": {
+			"properties": [
+				"dimensions",
+				"endDate",
+				"filters",
+				"rowLimit",
+				"searchType",
+				"siteUrl",
+				"startDate",
+				"startRow"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"query_top_pages": {
+			"properties": [
+				"brand",
+				"contentGroupId",
+				"endDate",
+				"limit",
+				"offset",
+				"searchType",
+				"siteUrl",
+				"startDate",
+				"topicClusterId"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"query_top_queries": {
+			"properties": [
+				"brand",
+				"contentGroupId",
+				"endDate",
+				"limit",
+				"offset",
+				"searchType",
+				"siteUrl",
+				"startDate",
+				"topicClusterId"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"remove_tracked_urls": {
+			"properties": [
+				"siteUrl",
+				"urls"
+			],
+			"required": [
+				"siteUrl",
+				"urls"
+			]
+		},
+		"run_feed_audit": {
+			"properties": [
+				"force",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"score_opportunities": {
+			"properties": [
+				"endDate",
+				"limit",
+				"minImpressions",
+				"searchType",
+				"siteUrl",
+				"startDate"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"set_dashboard_visibility": {
+			"properties": [
+				"siteUrls",
+				"visible"
+			],
+			"required": [
+				"siteUrls",
+				"visible"
+			]
+		},
+		"submit_indexnow_urls": {
+			"properties": [
+				"siteUrl",
+				"urls"
+			],
+			"required": [
+				"siteUrl",
+				"urls"
+			]
+		},
+		"submit_sitemap": {
+			"properties": [
+				"siteUrl",
+				"sitemapUrls"
+			],
+			"required": [
+				"siteUrl",
+				"sitemapUrls"
+			]
+		},
+		"update_annotation": {
+			"properties": [
+				"annotationId",
+				"category",
+				"color",
+				"description",
+				"eventDate",
+				"label"
+			],
+			"required": [
+				"annotationId"
+			]
+		},
+		"update_content_group": {
+			"properties": [
+				"color",
+				"description",
+				"groupId",
+				"name",
+				"rules"
+			],
+			"required": [
+				"groupId"
+			]
+		},
+		"update_indexnow_settings": {
+			"properties": [
+				"clear",
+				"generateKey",
+				"indexnowApiKey",
+				"siteUrl"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"update_saved_filter": {
+			"properties": [
+				"filterId",
+				"filterLogic",
+				"filters",
+				"name"
+			],
+			"required": [
+				"filterId"
+			]
+		},
+		"update_site": {
+			"properties": [
+				"brandedKeywords",
+				"crawlMaxConcurrency",
+				"crawlMinDelayMs",
+				"siteUrl",
+				"sitemapUrls",
+				"tags"
+			],
+			"required": [
+				"siteUrl"
+			]
+		},
+		"update_topic_cluster": {
+			"properties": [
+				"clusterId",
+				"keywords",
+				"mode",
+				"name"
+			],
+			"required": [
+				"clusterId"
+			]
+		}
+	}
+}

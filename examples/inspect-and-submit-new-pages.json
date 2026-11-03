@@ -1,0 +1,48 @@
+{
+	"name": "GSC Wizard: inspect a published page and notify IndexNow",
+	"nodes": [
+		{
+			"parameters": { "httpMethod": "POST", "path": "page-published", "options": {} },
+			"id": "2f0c7c52-1b0e-4d7f-8a9b-3c4d5e6f7a01",
+			"name": "Page Published",
+			"type": "n8n-nodes-base.webhook",
+			"typeVersion": 2,
+			"position": [0, 0],
+			"webhookId": "2f0c7c52-1b0e-4d7f-8a9b-3c4d5e6f7a99"
+		},
+		{
+			"parameters": {
+				"resource": "indexNow",
+				"operation": "submit",
+				"siteUrl": { "__rl": true, "mode": "url", "value": "sc-domain:example.com" },
+				"urls": "={{ $json.body.url }}"
+			},
+			"id": "2f0c7c52-1b0e-4d7f-8a9b-3c4d5e6f7a02",
+			"name": "Submit URL to IndexNow",
+			"type": "n8n-nodes-gsc-wizard.gscWizard",
+			"typeVersion": 1,
+			"position": [260, 0],
+			"credentials": { "gscWizardApi": { "id": "", "name": "GSC Wizard API" } }
+		},
+		{
+			"parameters": {
+				"resource": "urlInspection",
+				"operation": "inspect",
+				"siteUrl": { "__rl": true, "mode": "url", "value": "sc-domain:example.com" },
+				"inspectionUrl": "={{ $('Page Published').item.json.body.url }}",
+				"simplify": true
+			},
+			"id": "2f0c7c52-1b0e-4d7f-8a9b-3c4d5e6f7a03",
+			"name": "Inspect URL",
+			"type": "n8n-nodes-gsc-wizard.gscWizard",
+			"typeVersion": 1,
+			"position": [520, 0],
+			"credentials": { "gscWizardApi": { "id": "", "name": "GSC Wizard API" } }
+		}
+	],
+	"connections": {
+		"Page Published": { "main": [[{ "node": "Submit URL to IndexNow", "type": "main", "index": 0 }]] },
+		"Submit URL to IndexNow": { "main": [[{ "node": "Inspect URL", "type": "main", "index": 0 }]] }
+	},
+	"settings": {}
+}

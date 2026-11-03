@@ -1,0 +1,36 @@
+{
+	"name": "GSC Wizard: weekly decaying content",
+	"nodes": [
+		{
+			"parameters": {
+				"rule": { "interval": [{ "field": "weeks", "triggerAtDay": [1], "triggerAtHour": 8 }] }
+			},
+			"id": "8b1f6f0e-6a3e-4c8e-9a51-0d8f3b9f1a01",
+			"name": "Every Monday 08:00",
+			"type": "n8n-nodes-base.scheduleTrigger",
+			"typeVersion": 1.2,
+			"position": [0, 0]
+		},
+		{
+			"parameters": {
+				"resource": "insight",
+				"operation": "findDecayingContent",
+				"siteUrl": { "__rl": true, "mode": "url", "value": "sc-domain:example.com" },
+				"limit": 20,
+				"simplify": true,
+				"options": { "dimension": "page", "minBaselineClicks": 10 },
+				"sort": { "sortBy": "clicksLost" }
+			},
+			"id": "8b1f6f0e-6a3e-4c8e-9a51-0d8f3b9f1a02",
+			"name": "Find Decaying Pages",
+			"type": "n8n-nodes-gsc-wizard.gscWizard",
+			"typeVersion": 1,
+			"position": [260, 0],
+			"credentials": { "gscWizardApi": { "id": "", "name": "GSC Wizard API" } }
+		}
+	],
+	"connections": {
+		"Every Monday 08:00": { "main": [[{ "node": "Find Decaying Pages", "type": "main", "index": 0 }]] }
+	},
+	"settings": {}
+}
