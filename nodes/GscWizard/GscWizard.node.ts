@@ -186,25 +186,9 @@ export class GscWizard implements INodeType {
 			{
 				name: 'gscWizardApi',
 				required: true,
-				displayOptions: { show: { authentication: ['apiKey'] } },
-			},
-			{
-				name: 'gscWizardOAuth2Api',
-				required: true,
-				displayOptions: { show: { authentication: ['oAuth2'] } },
 			},
 		],
 		properties: [
-			{
-				displayName: 'Authentication',
-				name: 'authentication',
-				type: 'options',
-				options: [
-					{ name: 'API Key', value: 'apiKey' },
-					{ name: 'OAuth2', value: 'oAuth2' },
-				],
-				default: 'apiKey',
-			},
 			{
 				displayName: 'Resource',
 				name: 'resource',

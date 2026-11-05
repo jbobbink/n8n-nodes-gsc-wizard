@@ -21,15 +21,6 @@ interface ApiErrorBody {
 	nextStep?: string;
 }
 
-function credentialType(context: Context, itemIndex: number): string {
-	const authentication = (
-		'getInputData' in context
-			? context.getNodeParameter('authentication', itemIndex, 'apiKey')
-			: context.getNodeParameter('authentication', 'apiKey')
-	) as string;
-	return authentication === 'oAuth2' ? 'gscWizardOAuth2Api' : 'gscWizardApi';
-}
-
 function parseBody(value: unknown): ApiErrorBody | undefined {
 	let body = value;
 	if (typeof body === 'string') {
@@ -102,7 +93,7 @@ export function toNodeApiError(context: Context, error: unknown, itemIndex?: num
 			message = `GSC Wizard did not accept the credential${suffix}`;
 			description = joinSentences(
 				apiMessage,
-				'Open the GSC Wizard credential and paste a valid API key (GSC Wizard app > Account > MCP API keys), or reconnect the OAuth2 credential.',
+				'Open the GSC Wizard credential and paste a valid API key (GSC Wizard app > Account > MCP API keys).',
 			);
 			break;
 		case 402:
@@ -178,7 +169,7 @@ export async function gscWizardApiRequest(
 	try {
 		return (await this.helpers.httpRequestWithAuthentication.call(
 			this,
-			credentialType(this, itemIndex),
+			'gscWizardApi',
 			options,
 		)) as IDataObject;
 	} catch (error) {

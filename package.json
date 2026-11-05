@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-gsc-wizard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "n8n node for GSC Wizard: Google Search Console, GA4, URL inspection, sitemaps, IndexNow and SEO insights in your workflows",
   "license": "MIT",
   "homepage": "https://github.com/jbobbink/n8n-nodes-gsc-wizard#readme",
@@ -39,8 +39,7 @@
     "n8nNodesApiVersion": 1,
     "strict": true,
     "credentials": [
-      "dist/credentials/GscWizardApi.credentials.js",
-      "dist/credentials/GscWizardOAuth2Api.credentials.js"
+      "dist/credentials/GscWizardApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/GscWizard/GscWizard.node.js"

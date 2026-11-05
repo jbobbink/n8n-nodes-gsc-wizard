@@ -67,7 +67,6 @@ const site = { mode: 'list', value: 'sc-domain:example.com' };
 test('top queries walk pagination.nextOffset until hasMore is false', async () => {
 	const { ctx, calls } = context(
 		{
-			authentication: 'apiKey',
 			resource: 'searchPerformance',
 			operation: 'getTopQueries',
 			siteUrl: site,
@@ -359,15 +358,24 @@ test('the generic tool run refuses arguments that are not a JSON object', async 
 	await assert.rejects(run(ctx), /must hold a JSON object \[Item 0\]/);
 });
 
-test('OAuth2 authentication uses the OAuth2 credential', async () => {
-	const { ctx, calls } = context(
-		{ authentication: 'oAuth2', resource: 'account', operation: 'get' },
-		() => ({ user: { email: 'a@example.com' } }),
-	);
+test('the account call uses the API key credential', async () => {
+	const { ctx, calls } = context({ resource: 'account', operation: 'get' }, () => ({
+		user: { email: 'a@example.com' },
+	}));
 	await run(ctx);
-	assert.equal(calls[0].credentialType, 'gscWizardOAuth2Api');
+	assert.equal(calls[0].credentialType, 'gscWizardApi');
 	assert.equal(calls[0].method, 'GET');
 	assert.equal(calls[0].url, 'https://mcp.gscwizard.com/v1/account');
+});
+
+test('the node offers the API key credential and no Authentication selector', () => {
+	const { description } = new GscWizard();
+	assert.deepEqual(
+		description.credentials.map((c) => c.name),
+		['gscWizardApi'],
+	);
+	assert.equal(description.credentials[0].displayOptions, undefined);
+	assert.ok(!description.properties.some((p) => p.name === 'authentication'));
 });
 
 function httpError(status, body) {
@@ -427,7 +435,7 @@ test('continue on fail turns a failed item into an error item and keeps going', 
 });
 
 test('the property list search filters and flags properties that cannot be read', async () => {
-	const { ctx, calls } = loadOptionsContext({ authentication: 'apiKey' }, () => ({
+	const { ctx, calls } = loadOptionsContext({}, () => ({
 		sites: [
 			{ siteUrl: 'sc-domain:example.com', readable: true, activated: true },
 			{ siteUrl: 'https://shop.example.com/', readable: true, activated: false },
@@ -448,7 +456,7 @@ test('the property list search filters and flags properties that cannot be read'
 });
 
 test('the tool list search shows the title and the tool name', async () => {
-	const { ctx } = loadOptionsContext({ authentication: 'oAuth2' }, () => ({
+	const { ctx } = loadOptionsContext({}, () => ({
 		tools: [
 			{ name: 'get_core_web_vitals', title: 'Core Web Vitals' },
 			{ name: 'list_sites', title: 'List properties' },

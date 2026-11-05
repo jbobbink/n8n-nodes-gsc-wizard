@@ -221,7 +221,7 @@ const GET_ROUTES = new Set([
 
 for (const params of CASES) {
 	test(`${params.resource}: ${params.operation} sends only fields the API accepts`, async () => {
-		const { ctx, calls } = stub({ authentication: 'apiKey', ...params });
+		const { ctx, calls } = stub(params);
 		await new GscWizard().execute.call(ctx);
 		assert.ok(calls.length > 0, 'the operation made no request');
 		for (const call of calls) {

@@ -22,28 +22,13 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Credentials
 
-You need a GSC Wizard account with an active plan or trial, and at least one Search Console property connected and activated in the app. [Sign up at gscwizard.com](https://gscwizard.com); every new account starts with a free trial. The node offers two ways to sign in.
+You need a GSC Wizard account with an active plan or trial, and at least one Search Console property connected and activated in the app. [Sign up at gscwizard.com](https://gscwizard.com); every new account starts with a free trial. The node signs in with an API key.
 
 ### API key
 
 1. In the [GSC Wizard app](https://tool.gscwizard.com), open **Account > MCP API keys** and create a key. A key starts with `gscw_live_`.
 2. Give the key **read & write** access if the workflow creates annotations, submits sitemaps or sends IndexNow URLs. A read-only key runs every read operation and is refused for those.
 3. In n8n, create a **GSC Wizard API** credential and paste the key. n8n checks it against your account when you save.
-
-### OAuth2
-
-1. In n8n, create a **GSC Wizard OAuth2 API** credential and select **Connect my account**.
-2. Sign in to GSC Wizard and approve access. n8n registers itself with GSC Wizard automatically (OAuth 2.1 dynamic client registration with PKCE), so there is no client ID or secret to copy. The consent screen marks the client as recently registered, which is expected for a new n8n connection.
-
-The OAuth2 credential asks for read and write access. You can revoke it at any time under **Account > Connected apps** in GSC Wizard.
-
-If your n8n version predates dynamic client registration, the credential form shows **Client ID** and **Client Secret** fields instead. Register a client once with the **OAuth Redirect URL** shown in that form, then paste the `client_id` and `client_secret` it returns:
-
-```bash
-curl -X POST https://tool.gscwizard.com/api/oauth/register \
-  -H "Content-Type: application/json" \
-  -d '{"client_name": "n8n", "redirect_uris": ["https://your-n8n.example.com/rest/oauth2-credential/callback"], "token_endpoint_auth_method": "client_secret_basic"}'
-```
 
 ## Operations
 
@@ -103,7 +88,7 @@ Import these from the [`examples`](examples) folder (**Workflows > Import from F
 
 ## Compatibility
 
-Built with `@n8n/node-cli` 0.55 and tested on n8n 2.46.4. The API key credential works on every n8n version that supports community nodes (`n8nNodesApiVersion` 1). The OAuth2 credential connects in one click on n8n versions with dynamic client registration; on older versions, register a client as described under [OAuth2](#oauth2).
+Built with `@n8n/node-cli` 0.55 and tested on n8n 2.46.4. It works on every n8n version that supports community nodes (`n8nNodesApiVersion` 1).
 
 ## Development
 
@@ -126,6 +111,10 @@ Releases are published to npm from GitHub Actions with a provenance statement (`
 - Questions or problems: [open an issue](https://github.com/jbobbink/n8n-nodes-gsc-wizard/issues) or email support@gscwizard.com
 
 ## Version history
+
+### 0.1.1
+
+Removes the OAuth2 credential at n8n's request, because dynamic client registration is not yet generally available for community nodes. The API key credential covers every operation. An existing node with OAuth2 selected needs a GSC Wizard API credential instead.
 
 ### 0.1.0
 
