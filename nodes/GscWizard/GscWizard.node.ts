@@ -27,6 +27,9 @@ import { urlInspectionFields, urlInspectionOperations } from './descriptions/url
 import type { Paging } from './transport';
 import { gscWizardApiRequest, runTool, runToolPaged } from './transport';
 
+/** Options that steer the node itself and are never sent to the API. */
+const NODE_ONLY_OPTIONS = new Set(['fullResponse', 'changeTypes']);
+
 const DATE_OPTIONS = new Set(['startDate', 'endDate', 'comparisonStartDate', 'comparisonEndDate']);
 
 const DATE_LABELS: Record<string, string> = {
@@ -299,7 +302,7 @@ export class GscWizard implements INodeType {
 			const options = this.getNodeParameter(name, itemIndex, {}) as IDataObject;
 			const args: IDataObject = {};
 			for (const [key, value] of Object.entries(options)) {
-				if (key === 'fullResponse' || value === '' || value === undefined || value === null)
+				if (NODE_ONLY_OPTIONS.has(key) || value === '' || value === undefined || value === null)
 					continue;
 				args[key] =
 					DATE_OPTIONS.has(key) || key === 'eventDate' ? toDate(value, key, itemIndex) : value;
@@ -415,7 +418,10 @@ export class GscWizard implements INodeType {
 							i,
 						);
 					} else if (operation === 'query') {
-						const dimensions = this.getNodeParameter('dimensions', i, []) as string[];
+						const queryOptions = this.getNodeParameter('options', i, {}) as IDataObject;
+						const dimensions = Array.isArray(queryOptions.dimensions)
+							? (queryOptions.dimensions as string[])
+							: ['query'];
 						if (dimensions.length > 4) {
 							throw invalidInput(
 								this.getNode(),
@@ -497,11 +503,10 @@ export class GscWizard implements INodeType {
 						if (fullResponse(i)) {
 							results = [response];
 						} else {
-							const wanted = this.getNodeParameter(
-								'changeTypes',
-								i,
-								RANKING_CHANGE_TYPES,
-							) as string[];
+							const rankingOptions = this.getNodeParameter('options', i, {}) as IDataObject;
+							const wanted = Array.isArray(rankingOptions.changeTypes)
+								? (rankingOptions.changeTypes as string[])
+								: RANKING_CHANGE_TYPES;
 							results = RANKING_CHANGE_TYPES.filter((type) => wanted.includes(type)).flatMap(
 								(type) => listOf(response, type).map((row) => ({ changeType: type, ...row })),
 							);

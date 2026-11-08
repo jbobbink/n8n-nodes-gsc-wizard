@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Moved Dimensions (Search Performance > Query) and Change Types (Search Performance > Get Ranking Changes) into each operation's Options collection, at n8n's request. Both keep their defaults when the option is not added: rows grouped by query, and all four change types.
+- Marked Annotation > Scope as required: it always has a value and decides whether the Property field is shown.
+
 ## 0.1.1
 
 - Removed the OAuth2 credential and the Authentication selector, at n8n's request: dynamic client registration is not yet generally available for community nodes. The API key credential covers every operation.

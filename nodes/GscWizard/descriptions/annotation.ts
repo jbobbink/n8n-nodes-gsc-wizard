@@ -80,6 +80,7 @@ export const annotationFields: INodeProperties[] = [
 		displayName: 'Scope',
 		name: 'scope',
 		type: 'options',
+		required: true,
 		options: [
 			{
 				name: 'Account',

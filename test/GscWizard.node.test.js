@@ -131,11 +131,10 @@ test('custom query names each key after its dimension and forwards filters', asy
 			resource: 'searchPerformance',
 			operation: 'query',
 			siteUrl: { mode: 'url', value: 'https://www.example.com/' },
-			dimensions: ['date', 'query'],
 			filters: { filter: [{ dimension: 'country', operator: 'equals', expression: 'nld' }] },
 			returnAll: false,
 			limit: 50,
-			options: {},
+			options: { dimensions: ['date', 'query'] },
 		},
 		() => ({
 			rows: [{ keys: ['2026-05-03', 'shoes'], clicks: 4, impressions: 40, ctr: 10, position: 2.5 }],
@@ -187,8 +186,7 @@ test('ranking changes become one item per mover with a changeType', async () => 
 			operation: 'getRankingChanges',
 			siteUrl: site,
 			limit: 50,
-			changeTypes: ['declined', 'new'],
-			options: { dimension: 'page' },
+			options: { dimension: 'page', changeTypes: ['declined', 'new'] },
 		},
 		() => ({
 			improved: [{ key: '/a' }],
@@ -501,7 +499,6 @@ test('device and country filters are put in the case Search Console stores them 
 			resource: 'searchPerformance',
 			operation: 'query',
 			siteUrl: site,
-			dimensions: ['device'],
 			filters: {
 				filter: [
 					{ dimension: 'device', operator: 'equals', expression: ' mobile ' },
@@ -512,7 +509,7 @@ test('device and country filters are put in the case Search Console stores them 
 			},
 			returnAll: false,
 			limit: 5,
-			options: {},
+			options: { dimensions: ['device'] },
 		},
 		() => ({ rows: [], pagination: { hasMore: false } }),
 	);
@@ -544,4 +541,57 @@ test('a GA4 report on a property without GA4 says so instead of returning nothin
 			return true;
 		});
 	}
+});
+
+test('Dimensions and Change Types keep their defaults when the options are not added', async () => {
+	const q = context(
+		{
+			resource: 'searchPerformance',
+			operation: 'query',
+			siteUrl: site,
+			returnAll: false,
+			limit: 5,
+			options: {},
+		},
+		() => ({ rows: [{ keys: ['shoes'], clicks: 1 }], pagination: { hasMore: false } }),
+	);
+	const [rows] = await run(q.ctx);
+	assert.deepEqual(q.calls[0].body.dimensions, ['query']);
+	assert.equal(rows[0].json.query, 'shoes');
+
+	const r = context(
+		{
+			resource: 'searchPerformance',
+			operation: 'getRankingChanges',
+			siteUrl: site,
+			limit: 50,
+			options: {},
+		},
+		() => ({
+			improved: [{ key: 'a' }],
+			declined: [{ key: 'b' }],
+			new: [{ key: 'c' }],
+			lost: [{ key: 'd' }],
+		}),
+	);
+	const [movers] = await run(r.ctx);
+	assert.deepEqual(
+		movers.map((i) => i.json.changeType),
+		['improved', 'declined', 'new', 'lost'],
+	);
+	assert.equal(r.calls[0].body.changeTypes, undefined);
+});
+
+test('Dimensions and Change Types live in the Options collection, not at the top level', () => {
+	const { properties } = new GscWizard().description;
+	assert.ok(!properties.some((p) => p.name === 'dimensions' || p.name === 'changeTypes'));
+	const optionsFor = (operation) =>
+		properties.find(
+			(p) =>
+				p.name === 'options' &&
+				p.displayOptions.show.resource.includes('searchPerformance') &&
+				p.displayOptions.show.operation.includes(operation),
+		);
+	assert.ok(optionsFor('query').options.some((o) => o.name === 'dimensions'));
+	assert.ok(optionsFor('getRankingChanges').options.some((o) => o.name === 'changeTypes'));
 });

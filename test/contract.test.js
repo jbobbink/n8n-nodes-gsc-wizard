@@ -48,11 +48,10 @@ const CASES = [
 		resource: 'searchPerformance',
 		operation: 'query',
 		siteUrl: site,
-		dimensions: ['query', 'page'],
 		filters: { filter: [{ dimension: 'page', operator: 'contains', expression: '/blog/' }] },
 		returnAll: false,
 		limit: 10,
-		options: { ...dates, searchType: 'news' },
+		options: { ...dates, dimensions: ['query', 'page'], searchType: 'news' },
 	},
 	{
 		resource: 'searchPerformance',
@@ -73,8 +72,13 @@ const CASES = [
 		operation: 'getRankingChanges',
 		siteUrl: site,
 		limit: 50,
-		changeTypes: ['new'],
-		options: { ...dates, ...comparison, dimension: 'page', searchType: 'web' },
+		options: {
+			...dates,
+			...comparison,
+			changeTypes: ['new'],
+			dimension: 'page',
+			searchType: 'web',
+		},
 	},
 	{
 		resource: 'urlInspection',

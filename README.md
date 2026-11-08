@@ -112,6 +112,10 @@ Releases are published to npm from GitHub Actions with a provenance statement (`
 
 ## Version history
 
+### 0.1.2
+
+Moves Dimensions (Search Performance > Query) and Change Types (Search Performance > Get Ranking Changes) into the Options collection, at n8n's request. Both keep their defaults when the option is not added.
+
 ### 0.1.1
 
 Removes the OAuth2 credential at n8n's request, because dynamic client registration is not yet generally available for community nodes. The API key credential covers every operation. An existing node with OAuth2 selected needs a GSC Wizard API credential instead.

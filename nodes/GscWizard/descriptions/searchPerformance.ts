@@ -94,22 +94,6 @@ export const searchPerformanceFields: INodeProperties[] = [
 
 	// Query
 	{
-		displayName: 'Dimensions',
-		name: 'dimensions',
-		type: 'multiOptions',
-		options: [
-			{ name: 'Country', value: 'country' },
-			{ name: 'Date', value: 'date' },
-			{ name: 'Device', value: 'device' },
-			{ name: 'Page', value: 'page' },
-			{ name: 'Query', value: 'query' },
-			{ name: 'Search Appearance', value: 'searchAppearance' },
-		],
-		default: ['query'],
-		description: 'Group rows by these dimensions (up to 4). Leave empty for site totals.',
-		displayOptions: showFor(resource, ['query']),
-	},
-	{
 		displayName: 'Filters',
 		name: 'filters',
 		type: 'fixedCollection',
@@ -186,22 +170,6 @@ export const searchPerformanceFields: INodeProperties[] = [
 		displayOptions: showFor(resource, ['getQueryPerformance']),
 	},
 
-	// Ranking changes
-	{
-		displayName: 'Change Types',
-		name: 'changeTypes',
-		type: 'multiOptions',
-		options: [
-			{ name: 'Declined', value: 'declined', description: 'Average position got worse' },
-			{ name: 'Improved', value: 'improved', description: 'Average position got better' },
-			{ name: 'Lost', value: 'lost', description: 'Ranked in the comparison period only' },
-			{ name: 'New', value: 'new', description: 'Ranked in the date range only' },
-		],
-		default: ['declined', 'improved', 'lost', 'new'],
-		description: 'Which kinds of change to return. Each item gets a changeType field.',
-		displayOptions: showFor(resource, ['getRankingChanges']),
-	},
-
 	returnAllField(resource, [...pagedReports, 'query']),
 	limitField(resource, [...pagedReports, 'query'], 100000),
 	limitField(resource, ['getRankingChanges'], 10000, false),
@@ -214,7 +182,28 @@ export const searchPerformanceFields: INodeProperties[] = [
 	optionsCollection(
 		resource,
 		['query'],
-		[endDateOption, fullResponseOption, searchTypeOption, startDateOption],
+		[
+			{
+				displayName: 'Dimensions',
+				name: 'dimensions',
+				type: 'multiOptions',
+				options: [
+					{ name: 'Country', value: 'country' },
+					{ name: 'Date', value: 'date' },
+					{ name: 'Device', value: 'device' },
+					{ name: 'Page', value: 'page' },
+					{ name: 'Query', value: 'query' },
+					{ name: 'Search Appearance', value: 'searchAppearance' },
+				],
+				default: ['query'],
+				description:
+					'Group rows by these dimensions (up to 4). Rows are grouped by query when this option is not added. Leave it empty for site totals.',
+			},
+			endDateOption,
+			fullResponseOption,
+			searchTypeOption,
+			startDateOption,
+		],
 	),
 	optionsCollection(
 		resource,
@@ -243,6 +232,20 @@ export const searchPerformanceFields: INodeProperties[] = [
 		resource,
 		['getRankingChanges'],
 		[
+			{
+				displayName: 'Change Types',
+				name: 'changeTypes',
+				type: 'multiOptions',
+				options: [
+					{ name: 'Declined', value: 'declined', description: 'Average position got worse' },
+					{ name: 'Improved', value: 'improved', description: 'Average position got better' },
+					{ name: 'Lost', value: 'lost', description: 'Ranked in the comparison period only' },
+					{ name: 'New', value: 'new', description: 'Ranked in the date range only' },
+				],
+				default: ['declined', 'improved', 'lost', 'new'],
+				description:
+					'Which kinds of change to return. All four are returned when this option is not added. Each item gets a changeType field.',
+			},
 			comparisonEndDateOption,
 			comparisonStartDateOption,
 			{
