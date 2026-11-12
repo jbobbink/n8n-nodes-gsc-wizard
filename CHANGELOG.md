@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Removed the Tool resource and its Run operation, at n8n's request: it passed a free-form JSON object to any GSC Wizard tool, so its fields were neither shown nor checked in the node.
+
 ## 0.1.2
 
 - Moved Dimensions (Search Performance > Query) and Change Types (Search Performance > Get Ranking Changes) into each operation's Options collection, at n8n's request. Both keep their defaults when the option is not added: rows grouped by query, and all four change types.

@@ -55,7 +55,6 @@ Every operation that reads one property has a **Property** field: pick the prope
 | Search Performance | Get Ranking Changes | Queries or pages that are new, lost, improved or declined against an earlier period. Each item has a `changeType` field. |
 | Sitemap | Get Many | The sitemaps submitted for a property, with warnings and errors. |
 | Sitemap | Submit | Submit up to 20 published sitemaps to Google Search Console. |
-| Tool | Run | Run any GSC Wizard tool by name, for example the Bing, Yandex, Merchant Center or Core Web Vitals reports. |
 | URL Inspection | Inspect | Ask Google for the index status of a URL: verdict, coverage, last crawl and canonicals. |
 | URL Inspection | Get Many | Stored results of earlier inspections. |
 | URL Inspection | Get Quota | How many inspections the property has left today. |
@@ -71,8 +70,6 @@ The n8n AI Agent can use every operation of this node as a tool.
 **Return All and Limit.** The reports that Search Console pages through (top queries, top pages, countries, custom queries and stored inspections) fetch as many pages as **Return All** needs, up to 100 requests per run. The other reports take a **Limit** only, because the API returns their result in one response.
 
 **Simplify.** URL Inspection, Detect Anomalies and Find Decaying Content return more than ten fields per row. **Simplify** is on by default and keeps the ten most useful ones; turn it off to get every field.
-
-**Tool: Run.** This operation reaches the whole GSC Wizard API. Pick a tool from the list, then enter its input as a JSON object, for example `{"siteUrl": "sc-domain:example.com", "days": 28}`. The input fields of every tool are listed in the [OpenAPI reference](https://mcp.gscwizard.com/v1/openapi.json). When the tool returns a list, the node returns one item per row; the API names that list in the response's `listKey` field.
 
 **Rate limits.** GSC Wizard limits requests per account. When a run hits the limit the node says so and stops; turn on **Retry On Fail** in the node settings to let n8n wait and try again.
 
@@ -111,6 +108,10 @@ Releases are published to npm from GitHub Actions with a provenance statement (`
 - Questions or problems: [open an issue](https://github.com/jbobbink/n8n-nodes-gsc-wizard/issues) or email support@gscwizard.com
 
 ## Version history
+
+### 0.1.3
+
+Removes the Tool > Run operation at n8n's request: it took a free-form JSON object, so the node could not show or check its fields. Every other operation is unchanged.
 
 ### 0.1.2
 

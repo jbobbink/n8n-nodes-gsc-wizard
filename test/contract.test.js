@@ -255,7 +255,6 @@ test('every operation in the node description has a contract case', () => {
 			),
 		);
 	const covered = new Set(CASES.map((c) => `${c.resource}:${c.operation}`));
-	covered.add('tool:run'); // free-form: the user names the tool and its arguments
 	const uncovered = operationsByResource.filter((key) => !covered.has(key));
 	assert.deepEqual(uncovered, []);
 });

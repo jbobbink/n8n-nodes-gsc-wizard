@@ -323,39 +323,6 @@ test('IndexNow submit splits a comma and newline separated list and caps it at 1
 	await assert.rejects(run(second.ctx), /holds 101 URLs/);
 });
 
-test('the generic tool run splits rows by the listKey the API names', async () => {
-	const { ctx, calls } = context(
-		{
-			resource: 'tool',
-			operation: 'run',
-			toolName: { mode: 'name', value: 'get_core_web_vitals' },
-			arguments: '{"siteUrl":"sc-domain:example.com"}',
-			options: {},
-		},
-		() => ({ listKey: 'urls', sortedBy: 'lcp', urls: [{ url: '/a' }, { url: '/b' }] }),
-	);
-	const [out] = await run(ctx);
-	assert.equal(calls[0].url, 'https://mcp.gscwizard.com/v1/tools/get_core_web_vitals');
-	assert.deepEqual(
-		out.map((i) => i.json.url),
-		['/a', '/b'],
-	);
-});
-
-test('the generic tool run refuses arguments that are not a JSON object', async () => {
-	const { ctx } = context(
-		{
-			resource: 'tool',
-			operation: 'run',
-			toolName: { mode: 'name', value: 'list_sites' },
-			arguments: '[1, 2]',
-			options: {},
-		},
-		() => ({}),
-	);
-	await assert.rejects(run(ctx), /must hold a JSON object \[Item 0\]/);
-});
-
 test('the account call uses the API key credential', async () => {
 	const { ctx, calls } = context({ resource: 'account', operation: 'get' }, () => ({
 		user: { email: 'a@example.com' },
@@ -451,19 +418,6 @@ test('the property list search filters and flags properties that cannot be read'
 	]);
 	assert.equal(calls[0].url, 'https://mcp.gscwizard.com/v1/sites');
 	assert.equal(calls[0].credentialType, 'gscWizardApi');
-});
-
-test('the tool list search shows the title and the tool name', async () => {
-	const { ctx } = loadOptionsContext({}, () => ({
-		tools: [
-			{ name: 'get_core_web_vitals', title: 'Core Web Vitals' },
-			{ name: 'list_sites', title: 'List properties' },
-		],
-	}));
-	const { results } = await new GscWizard().methods.listSearch.searchTools.call(ctx, 'vitals');
-	assert.deepEqual(results, [
-		{ name: 'Core Web Vitals (get_core_web_vitals)', value: 'get_core_web_vitals' },
-	]);
 });
 
 test('property list simplify drops connection details but keeps readability flags', async () => {
@@ -594,4 +548,12 @@ test('Dimensions and Change Types live in the Options collection, not at the top
 		);
 	assert.ok(optionsFor('query').options.some((o) => o.name === 'dimensions'));
 	assert.ok(optionsFor('getRankingChanges').options.some((o) => o.name === 'changeTypes'));
+});
+
+test('the node has no free-form Tool resource', () => {
+	const { properties } = new GscWizard().description;
+	const resource = properties.find((p) => p.name === 'resource');
+	assert.ok(!resource.options.some((o) => o.value === 'tool'));
+	assert.ok(!properties.some((p) => p.name === 'toolName' || p.name === 'arguments'));
+	assert.equal(new GscWizard().methods.listSearch.searchTools, undefined);
 });

@@ -22,7 +22,6 @@ import {
 	searchPerformanceOperations,
 } from './descriptions/searchPerformance';
 import { sitemapFields, sitemapOperations } from './descriptions/sitemap';
-import { toolFields, toolOperations } from './descriptions/tool';
 import { urlInspectionFields, urlInspectionOperations } from './descriptions/urlInspection';
 import type { Paging } from './transport';
 import { gscWizardApiRequest, runTool, runToolPaged } from './transport';
@@ -206,7 +205,6 @@ export class GscWizard implements INodeType {
 					{ name: 'Property', value: 'property' },
 					{ name: 'Search Performance', value: 'searchPerformance' },
 					{ name: 'Sitemap', value: 'sitemap' },
-					{ name: 'Tool', value: 'tool' },
 					{ name: 'URL Inspection', value: 'urlInspection' },
 				],
 				default: 'searchPerformance',
@@ -226,8 +224,6 @@ export class GscWizard implements INodeType {
 			...searchPerformanceFields,
 			...sitemapOperations,
 			...sitemapFields,
-			...toolOperations,
-			...toolFields,
 			...urlInspectionOperations,
 			...urlInspectionFields,
 		],
@@ -254,21 +250,6 @@ export class GscWizard implements INodeType {
 						else if (site.activated === false) name += ' (not activated in GSC Wizard)';
 						return { name, value: siteUrl };
 					});
-				return { results };
-			},
-
-			async searchTools(
-				this: ILoadOptionsFunctions,
-				filter?: string,
-			): Promise<INodeListSearchResult> {
-				const response = await gscWizardApiRequest.call(this, 'GET', '/tools');
-				const needle = (filter ?? '').toLowerCase();
-				const results = listOf(response, 'tools')
-					.filter((tool) => `${tool.name ?? ''} ${tool.title ?? ''}`.toLowerCase().includes(needle))
-					.map((tool) => ({
-						name: tool.title ? `${String(tool.title)} (${String(tool.name)})` : String(tool.name),
-						value: String(tool.name),
-					}));
 				return { results };
 			},
 		},
@@ -666,38 +647,6 @@ export class GscWizard implements INodeType {
 					}
 				} else if (resource === 'account') {
 					results = [await gscWizardApiRequest.call(this, 'GET', '/account', undefined, i)];
-				} else if (resource === 'tool') {
-					const toolName = (
-						this.getNodeParameter('toolName', i, '', { extractValue: true }) as string
-					).trim();
-					const raw = this.getNodeParameter('arguments', i, '{}') as string | IDataObject;
-					let args: unknown = raw;
-					if (typeof raw === 'string') {
-						try {
-							args = raw.trim() === '' ? {} : JSON.parse(raw);
-						} catch {
-							throw invalidInput(
-								this.getNode(),
-								`The 'Arguments (JSON)' field is not valid JSON`,
-								'Enter a JSON object such as {"siteUrl": "sc-domain:example.com"}.',
-								i,
-							);
-						}
-					}
-					if (typeof args !== 'object' || args === null || Array.isArray(args)) {
-						throw invalidInput(
-							this.getNode(),
-							`The 'Arguments (JSON)' field must hold a JSON object`,
-							'Wrap the arguments in curly braces, or use {} for a tool without input.',
-							i,
-						);
-					}
-					const response = await runTool.call(this, toolName, args as IDataObject, i);
-					const listKey = response.listKey;
-					results =
-						!fullResponse(i) && typeof listKey === 'string' && Array.isArray(response[listKey])
-							? listOf(response, listKey)
-							: [response];
 				} else {
 					throw invalidInput(
 						this.getNode(),
